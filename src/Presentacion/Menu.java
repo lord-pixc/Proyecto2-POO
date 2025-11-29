@@ -71,6 +71,9 @@ public class Menu extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        Importar = new javax.swing.JButton();
+        Exportar = new javax.swing.JButton();
+        Limpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Taller Mecanico");
@@ -142,6 +145,30 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 90, 170, 150));
+
+        Importar.setText("Importar");
+        Importar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ImportarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Importar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, -1, -1));
+
+        Exportar.setText("Exportar");
+        Exportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExportarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Exportar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, -1, -1));
+
+        Limpiar.setText("Limpiar");
+        Limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -219,6 +246,18 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void ImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ImportarActionPerformed
+
+    private void ExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ExportarActionPerformed
+
+    private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LimpiarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -258,6 +297,9 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Exportar;
+    private javax.swing.JButton Importar;
+    private javax.swing.JButton Limpiar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
