@@ -15,4 +15,7 @@
     <estado id="004">
         <nombre>Completado</nombre>
     </estado>
+    <estado id="005">
+        <nombre>Cancelado</nombre>
+    </estado>
 </estados>
