@@ -4,14 +4,27 @@
  */
 package Presentacion;
 
+import Conceptos.Cliente;
+import Conceptos.Estado;
+import Conceptos.Mecanico;
+import Conceptos.Servicio;
+import Conceptos.Solicitud;
+import Util.GestorDatos;
+import Util.GuardarArchivo;
+import Util.cargadorXML;
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 /**
  *
  * @author Matias
  */
 public class Menu extends javax.swing.JFrame {
+
+    private final GestorDatos gestorDatos = GestorDatos.getInstancia();
 
     /**
      * Creates new form Menu
@@ -247,16 +260,49 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void ImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportarActionPerformed
-        // TODO add your handling code here:
+        try {
+            ArrayList<Cliente> clientes = cargarXML("src/Export/clientes.xml", "cliente");
+            ArrayList<Mecanico> mecanicos = cargarXML("src/Export/mecanicos.xml", "mecanico");
+            ArrayList<Servicio> servicios = cargarXML("src/Export/servicios.xml", "servicio");
+            ArrayList<Estado> estados = cargarXML("src/Export/estados.xml", "estado");
+            ArrayList<Solicitud> solicitudes = cargarXML("src/Export/solicitudes.xml", "solicitud");
+
+            gestorDatos.importarDatos(clientes, servicios, mecanicos, solicitudes, estados);
+            mostrarMensaje("Datos importados y guardados en .DAT", JOptionPane.INFORMATION_MESSAGE);
+        } catch (FileNotFoundException ex) {
+            mostrarMensaje("No se encontraron los archivos XML de exportación", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            mostrarMensaje("Ocurrió un error al importar: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_ImportarActionPerformed
 
     private void ExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportarActionPerformed
-        // TODO add your handling code here:
+        try {
+            GuardarArchivo.guardarClientes(gestorDatos.getClientes());
+            GuardarArchivo.guardarMecanicos(gestorDatos.getMecanicos());
+            GuardarArchivo.guardarServicios(gestorDatos.getServicios());
+            GuardarArchivo.guardarEstados(gestorDatos.getEstados());
+            GuardarArchivo.guardarSolicitudes(gestorDatos.getSolicitudes());
+            mostrarMensaje("Datos exportados a XML", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception ex) {
+            mostrarMensaje("No fue posible exportar los datos: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_ExportarActionPerformed
 
     private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
-        // TODO add your handling code here:
+        gestorDatos.limpiarDatos();
+        mostrarMensaje("Datos borrados y archivos .DAT vacíos", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_LimpiarActionPerformed
+
+    private <T> ArrayList<T> cargarXML(String ruta, String tipo) throws FileNotFoundException {
+        try (FileInputStream fis = new FileInputStream(ruta)) {
+            return (ArrayList<T>) cargadorXML.Cargar(fis, tipo);
+        }
+    }
+
+    private void mostrarMensaje(String mensaje, int tipo) {
+        JOptionPane.showMessageDialog(this, mensaje, "Taller Mecánico", tipo);
+    }
 
     /**
      * @param args the command line arguments
